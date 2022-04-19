@@ -21,7 +21,7 @@ imgs = []
 comp_imgs = []
 
 colors = {'green': [.5, .8, .7], 'purple': [.6, .5, .85]}
-color = colors['purple']
+color = colors['green']
 frame_nr = 0
 
 while vid.isOpened():
