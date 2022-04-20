@@ -6,13 +6,10 @@ import time
 import numpy as np
 import pygame
 
-
-green_coord_paths = glob.glob('coords/VID_*_green.npy')
-purple_coord_paths = [re.sub(r'green(?=\.npy$)', 'purple', path) for path in green_coord_paths]
-
+from coordinates1 import coordinate1_filepaths
 
 if __name__ == '__main__':
-    coord_path_pair_iter = zip(green_coord_paths, purple_coord_paths)
+    coord_paths_iter = coordinate1_filepaths.values().__iter__()
 
     # Doing pygame stuff!
     pygame.init()
@@ -48,11 +45,10 @@ if __name__ == '__main__':
                 sys.exit()
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
-                    coord_path_pair = coord_path_pair_iter.__next__()
-                    if coord_path_pair:
-                        green_path, purple_path = coord_path_pair
-                        green_coords = np.load(green_path)
-                        purple_coords = np.load(purple_path)
+                    coord_paths = coord_paths_iter.__next__()
+                    if coord_paths:
+                        green_coords = np.load(coord_paths['green'])
+                        purple_coords = np.load(coord_paths['purple'])
                         print(green_coords)
                         print(green_coords.shape)
                         frame_index = 0
